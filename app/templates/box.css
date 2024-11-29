@@ -1,0 +1,23 @@
+/* 容器样式 */
+.task-container {
+    display: flex; /* 使用Flexbox布局 */
+    flex-wrap: wrap; /* 允许子元素换行 */
+    gap: 10px; /* 任务项之间的间距 */
+}
+
+/* 任务项样式 */
+.task-item {
+    border: 2px solid #ccc; /* 设置边框 */
+    padding: 10px; /* 在边框和内容之间添加内边距 */
+    box-sizing: border-box; /* 确保内边距不增加元素的宽度和高度 */
+    aspect-ratio: 1 / 1; /* 使任务项为正方形 */
+    width: calc((100% - 20px) / 3); /* 每行三个任务项 */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* 任务操作样式 */
+.task-actions {
+    margin-top: 10px;
+}

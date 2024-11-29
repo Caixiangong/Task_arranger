@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="box.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .link-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .button-link {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: center;
+        }
+        .button-link-green {
+            background-color: #2ecc71;
+            color: white;
+        }
+        .button-link-green:hover {
+            background-color: #27ae60;
+        }
+        .button-link-yellow {
+            background-color: #f1c40f;
+            color: white;
+        }
+        .button-link-yellow:hover {
+            background-color: #e6b800;
+        }
+        .button-link-orange {
+            background-color: #e67e22;
+            color: white;
+        }
+        .button-link-orange:hover {
+            background-color: #d35400;
+        }
+        /* 容器样式 */
+        .task-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    }
+
+    .task-item {
+        border: 2px solid #333;
+        padding: 10px;
+        box-sizing: border-box;
+        aspect-ratio: 1 / 1;
+        width: calc((100% - 20px) / 3);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border-radius: 10px; /* 圆角矩形 */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 阴影 */
+    }
+
+    .task-item h3 {
+        font-size: 1.5em; /* 标题字号 */
+        text-align: center; /* 居中 */
+    }
+
+    .task-item p {
+        font-size: 1.2em; /* Deadline字号 */
+        text-align: center; /* 居中 */
+    }
+
+    .task-actions {
+        margin-top: 10px;
+    }
+    .delete-button {
+            background-color: #FF1111;
+            color: #000000;
+            border: 1px solid #000000;
+            border-radius: 5px;
+            padding: 10px 20px;
+            text-align: center;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px 0;
+            cursor: pointer;
+            width: 100px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <h1>Task Arranger-主页</h1>
+    <div class="link-container">
+        <a href="{{ url_for('task.new_task') }}" class="button-link button-link-green">Add New Task</a>
+        <a href="{{ url_for('timeline.timeline') }}" class="button-link button-link-orange">View timeine</a>
+        <a href="{{ url_for('chat.chat') }}" class="button-link button-link-yellow">My Chats</a>
+    </div>
+    
+    <div class="task-container">
+        {% for task in tasks %}
+            <div class="task-item">
+                <h3>{{ task.name }}</h3>
+                <p><strong>Deadline:</strong> {{ task.deadline }}</p>
+                <div>
+                    {{task.details}}
+                </div>
+                <div class="task-actions">
+                    <a href="{{ url_for('task.delete_task', id=task.id) }}" class="delete-button">删除</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

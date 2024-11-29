@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>时间线一览</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .back-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #007bff;
+            text-decoration: none;
+        }
+        .back-button:hover {
+            text-decoration: underline;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .task-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .task-item {
+            width: 80%;
+            margin: 15px 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-left: 5px solid #007bff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .task-item h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        .task-item p {
+            margin: 10px 0;
+            color: #666;
+        }
+        .task-item .task-details {
+            margin-bottom: 20px;
+            color: #555;
+        }
+        .task-actions {
+            text-align: right;
+        }
+        .delete-button {
+            background-color: #ff0000;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 15px;
+            text-decoration: none;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .delete-button:hover {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    <a href="{{ url_for('base.base') }}" class="back-button">返回</a>
+    <h1>时间线一览</h1>
+    <div class="task-container">
+        {% for task in tasks %}
+            <div class="task-item">
+                <h3>{{ task.name }}</h3>
+                <p><strong>Deadline:</strong> {{ task.deadline }}</p>
+                <div class="task-details">
+                    {{ task.details }}
+                </div>
+                <div class="task-actions">
+                    <a href="{{ url_for('task.delete_task', id=task.id) }}" class="delete-button">删除</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

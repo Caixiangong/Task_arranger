@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>添加新任务</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .form-container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-container label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-container input[type="text"],
+        .form-container input[type="datetime-local"],
+        .form-container textarea,
+        .form-container select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .form-container button:hover {
+            background-color: #45a049;
+        }
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #007BFF;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .back-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 8px 12px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .center-button {
+            padding: 10px 20px;
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: center;
+        }
+        
+    </style>
+</head>
+<body>
+    <a href="{{ url_for('base.base') }}" class="back-button">返回</a>
+<div class="form-container">
+    <h1>添加新任务</h1>
+    <form method="POST" action="/task/new_task">
+        <!-- 任务名称 -->
+        <label for="task_name">任务名称:</label>
+        <input type="text" name="task_name" id="task_name" placeholder="请输入任务名称" required>
+
+        <!-- 任务截止时间 -->
+        <label for="task_ddl">任务截止时间:</label>
+        <input type="datetime-local" name="task_ddl" id="task_ddl" required>
+
+        <!-- 任务标签颜色 -->
+        <label for="task_color">任务标签颜色:</label>
+        <select name="task_color" id="task_color" required>
+            <option value="0">红色</option>
+            <option value="1">蓝色</option>
+            <option value="2">绿色</option>
+            <option value="3">黄色</option>
+            <option value="4">橙色</option>
+            <option value="5">紫色</option>
+            <option value="6">粉色</option>
+            <option value="7">棕色</option>
+            <option value="8">灰色</option>
+            <option value="9">黑色</option>
+        </select>
+
+        <!-- 任务详细描述 -->
+        <label for="task_details">任务详细描述:</label>
+        <textarea name="task_details" id="task_details" placeholder="请输入任务详细描述"></textarea>
+
+        <!-- 提交按钮 -->
+        <button type="submit">确定</button>
+    </form>
+</div>
+
+<script>
+    // 设置默认截止时间为当前时间 + 30 分钟
+    document.addEventListener('DOMContentLoaded', function() {
+        const now = new Date();
+        now.setMinutes(now.getMinutes() + 30);
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const hour = String(now.getHours()).padStart(2, '0');
+        const minute = String(now.getMinutes()).padStart(2, '0');
+        const defaultDateTime = `${year}-${month}-${day}T${hour}:${minute}`;
+        document.getElementById('task_ddl').value = defaultDateTime;
+    });
+</script>
+
+</body>
+</html>
