@@ -7,3 +7,8 @@ conda activate env_lyx
 pip install -r requirements.txt
 ```
 
+在完成之后，您可以运行
+```
+python run.py
+```
+然后将弹出的ip(例如http://127.0.0.1:5000)复制到浏览器中打开即可。
